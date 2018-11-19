@@ -12,6 +12,7 @@ serialPort.list(function(err, ports) {
 });
 
 const videoList = document.getElementById("video-list");
+const player = document.getElementById("my-player");
 
 fs.readdir('./videos/', function(err, files){
     if (err) throw err;
@@ -19,6 +20,8 @@ fs.readdir('./videos/', function(err, files){
         if(file !== ".keep") {
             const li = document.createElement("li");
             li.appendChild(document.createTextNode(file));
+            li.addEventListener("click", () => { player.src = "./videos/" + file; });
+            li.style = "cursor: pointer; margin: 4px 0;"
             videoList.appendChild(li);
         }
     });
