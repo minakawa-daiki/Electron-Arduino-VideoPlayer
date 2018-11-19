@@ -5,14 +5,23 @@
 const serialPort = require('serialport');
 const fs = require('fs');
 
-serialPort.list(function(err, ports) {
-  ports.forEach(function(port){
-    console.log(port);
-  });
-});
-
 const videoList = document.getElementById("video-list");
 const player = document.getElementById("my-player");
+
+serialPort.list((err, ports) => {
+    ports.forEach((port) => {
+      if (port.manufacturer === 'Arduino (www.arduino.cc)') {
+        const sp = new serialPort(port.comName, {
+          baudrate: 9600
+        });
+        sp.on('data', function(res) {
+            if(res.toString() === "play") {
+                player.currentTime = 0;
+            }
+        });
+      }
+    });
+  });
 
 fs.readdir('./videos/', function(err, files){
     if (err) throw err;
