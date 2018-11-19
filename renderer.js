@@ -4,6 +4,7 @@
 
 const serialPort = require('serialport');
 const fs = require('fs');
+const path = require('path');
 
 const videoList = document.getElementById("video-list");
 const player = document.getElementById("my-player");
@@ -23,7 +24,7 @@ serialPort.list((err, ports) => {
     });
   });
 
-fs.readdir('./videos/', function(err, files){
+fs.readdir(path.join(__dirname, 'videos'), function(err, files){
     if (err) throw err;
     files.forEach(file => {
         if(file !== ".keep") {

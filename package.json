@@ -4,7 +4,9 @@
   "description": "Electron-Arduino-VideoPlayer",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package:mac": "electron-packager ./ electron-arduino-video-player --platform=darwin",
+    "package:win": "electron-packager ./ electron-arduino-video-player --platform=win32"
   },
   "repository": "https://github.com/minakawa-daiki/Electron-Arduino-VideoPlayer",
   "keywords": [
@@ -14,6 +16,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^3.0.4",
+    "electron-builder": "^20.36.2",
+    "electron-packager": "^12.2.0",
     "electron-rebuild": "^1.8.2"
   },
   "dependencies": {
